@@ -1,0 +1,37 @@
+﻿ 
+
+  .vdanger {
+        color:red;
+        font-size:larger;
+    }
+    fieldset {
+border: none;
+}.green {
+  color: #1abc9c;
+}
+
+
+    .menu {
+        color: #ecf0f1;
+        text-decoration: none;
+    }
+ 
+
+        input[type="submit"]:hover {
+            background: #1bc6a4;
+        }
+        .anchor{
+       color:#1abc9c;
+        text-decoration: none;
+        }
+#Logview{
+        padding-top: 41px;
+}
+a{
+color:#1abc9c}
+
+
+ /*ul li:hover a {
+  color: white;
+  background: #1abc9c;
+}*/

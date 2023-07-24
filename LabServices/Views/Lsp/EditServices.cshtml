@@ -1,0 +1,181 @@
+﻿@model LabServices.Models.AddLabService
+
+@{
+    ViewBag.Title = "AddLabServices";
+    Layout = "~/Views/Shared/LSPMaster.cshtml";
+}
+<style type="text/css">
+    .padl {
+        padding-left: 10px;
+    }
+
+    .vdanger {
+        color: red;
+        font-size: medium;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //
+        // $("#loginModal").modal('show');
+        //$("#Register").hide();
+        $("#Name").focus();
+
+        var $regexname = /^[a-zA-Z]+$/;
+        var zip_regex = /^[0-9]+$/;
+        var add_regex = /^[0-9a-zA-Z]+$/;
+        $("#Name").blur(function () {
+
+            var val = $("#Name").val();
+            if (val.length == 0) {
+                $("#lbltName").text("*");
+            }
+            if (!val.match($regexname)) {
+
+                $("#lblName").text("Invalid Name");
+            }
+            else
+                $("#lblName").text("");
+        });
+        $("#Description").blur(function () {
+
+            var val = $("#Description").val();
+            if (val.length == 0) {
+                $("#lblDescription").text("*");
+            }
+            if (!val.match($regexname)) {
+
+                $("#lblDescription").text("Invalid Name");
+            }
+            else
+                $("#lblDescription").text("");
+        });
+
+
+        $("#Cost").blur(function () {
+            var val = $("#Cost").val();
+            if (val.length == 0) {
+                $("#lblCost").text("*");
+            }
+            if (!val.match(zip_regex) || val.length > 10) {
+
+                $("#lblCost").text("Invalid Number");
+            }
+            else
+                $("#lblCost").text("");
+        });
+        $("#Duration").blur(function () {
+            var val = $("#Duration").val();
+            if (val.length == 0) {
+                $("#lblDuration").text("*");
+            }
+            if (!val.match(zip_regex) || val.length > 10) {
+
+                $("#lblDuration").text("Invalid Number");
+            }
+            else
+                $("#lblDuration").text("");
+        });
+
+
+
+    });
+</script>
+
+
+
+
+@using(Html.BeginForm("UpdateService", "Lsp", FormMethod.Post))
+
+{
+    @Html.AntiForgeryToken()
+    if (ViewData["errormsg"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewData["errormsg"];
+        </div>
+
+    }
+    else if (ViewData["successmsg"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewData["successmsg"]
+        </div>
+
+    }
+    <div class="form-horizontal">
+
+        <h4>Lab Services</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.TestCode, Model.TestCode)
+                @Html.HiddenFor(Model => Model.TestCode)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestName, new { htmlAttributes = new { @class = "form-control" ,id="Name" } })
+                @Html.ValidationMessageFor(model => model.TestName, "", new { @class = "text-danger" })
+                <span id="lblName" class="vdanger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestDescription, new { htmlAttributes = new { @class = "form-control" ,id="Description"} })
+                @Html.ValidationMessageFor(model => model.TestDescription, "", new { @class = "text-danger" })
+                <span id="lblDescription" class="vdanger"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestDuration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestDuration, new { @class = "form-control" ,id="Duration" })
+                @Html.ValidationMessageFor(model => model.TestDuration, "", new { @class = "text-danger" })
+                <span id="lblDuration" class="vdanger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CostOfTest, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CostOfTest, new { htmlAttributes = new { @class = "form-control" ,id="Cost" } })
+                @Html.ValidationMessageFor(model => model.CostOfTest, "", new { @class = "text-danger" })
+                <span id="lblCost" class="vdanger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LabHome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Yes
+                @Html.RadioButtonFor(Model => Model.LabHome, "Yes", new { selected = true })
+                No
+                @Html.RadioButtonFor(Model => Model.LabHome, "No")
+
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-danger" />
+
+            </div>
+        </div>
+    </div>
+}
+
+

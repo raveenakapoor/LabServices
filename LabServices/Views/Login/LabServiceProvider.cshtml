@@ -1,0 +1,130 @@
+﻿@model LabServices.Models.LSPModel
+
+@{
+    ViewBag.Title = "LabServiceProvider";
+
+ 
+}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
+<div class="row" style="padding:30px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="">
+        <h3 class="font" style="color:white">Lab Service Provider</h3>
+        <hr />
+        <div >
+            <table id="example" class="table table-hover dataTable no-footer border" cellspacing="0"  style=" background-color: white;">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Sno.")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ZipCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.State)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AltContactNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0, j = i + 1; i < @Model.Data.Tables[0].Rows.Count; i++, j++)
+            {
+                        <tr>
+                            <td>
+
+                                @j
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["LabId"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["name"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["zipcode"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["city"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["state1"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["email"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["category"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["contact_no"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["alternate_no"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["Address1"].ToString()
+
+                        </tr>
+                    }
+                </tbody>>
+            </table>
+        </div>
+        </div>
+    </div>
+        <style>
+            a.delete {
+                background: url(../../img/delete.png) no-repeat top left;
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: block;
+                width: 30px;
+                height: 30px;
+                text-indent: -9999px; /* hides the link text */
+            }
+
+            a.edit {
+                background: url(../../img/edit2.png) no-repeat top left;
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: block;
+                width: 30px;
+                height: 30px;
+                text-indent: -9999px; /* hides the link text */
+            }
+        </style>

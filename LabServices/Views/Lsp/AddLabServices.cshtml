@@ -1,0 +1,132 @@
+﻿@model LabServices.Models.AddLabService
+
+@{
+    ViewBag.Title = "AddLabServices";
+    Layout = "~/Views/Shared/LSPMaster.cshtml";
+}
+<style type="text/css">
+    .padl {
+        padding-left: 10px;
+    }
+    .vdanger {
+        color: red;
+        font-size: medium;
+    }
+</style>
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (ViewData["errormsg"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewData["errormsg"];
+        </div>
+
+    }
+    else if (ViewData["successmsg"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewData["successmsg"]
+        </div>
+
+    }
+    <div class="form-horizontal">
+
+            <h4>Add Lab Test</h4>
+     <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.LabId, htmlAttributes: new { @class = "control-label  font" })
+            </div>
+            <div class="col-md-8">
+                @Html.LabelFor(model => model.LabId, @Model.LabId, new { @class = "form-control" })
+
+                @Html.HiddenFor(Model => Model.LabId)
+                @Html.ValidationMessageFor(model => model.LabId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <div class="col-md-4">
+
+                @Html.LabelFor(model => model.TestName, htmlAttributes: new { @class = "control-label " })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TestName, new { htmlAttributes = new { @class = "form-control", id = "Name" , required="required", placeholder="Test Name"} })
+                    @Html.ValidationMessageFor(model => model.TestName, "", new { @class = "text-danger" })
+                    <span id="lblName" class="vdanger"></span>
+                </div>
+            </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-4">
+
+                @Html.LabelFor(model => model.TestDescription, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.TestDescription, new { @class = "form-control", id = "Description" , placeholder="Test Description" , required="required"})
+                    @Html.ValidationMessageFor(model => model.TestDescription, "", new { @class = "text-danger" })
+                    <span id="lblDescription" class="vdanger"></span>
+                </div>
+            </div>
+
+
+        <div class="form-group">
+            <div class="col-md-4">
+
+                @Html.LabelFor(model => model.TestDuration, htmlAttributes: new { @class = "control-label " })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TestDuration, new { @class = "form-control", @type = "time", id = "Duration" })
+                    @Html.ValidationMessageFor(model => model.TestDuration, "", new { @class = "text-danger" })
+                    <span id="lblDuration" class="vdanger"></span>
+                </div>
+            </div>
+
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.CostOfTest, htmlAttributes: new { @class = "control-label " })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CostOfTest, new { htmlAttributes = new { @class = "form-control", id = "Cost" , type="Number" , required="required" ,placeholder="Test Cost" } })
+                    @Html.ValidationMessageFor(model => model.CostOfTest, "", new { @class = "text-danger" })
+                    <span id="lblCost" class="vdanger"></span>
+                </div>
+            </div>
+
+       <div class="form-group">
+           <div class="col-md-4">
+               @Html.LabelFor(model => model.LabHome, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-8">
+                   Yes
+                   @Html.RadioButtonFor(Model => Model.LabHome, "Yes", new { @checked = "checked" })
+                   No
+                   @Html.RadioButtonFor(Model => Model.LabHome, "No")
+
+
+               </div>
+           </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-10">
+                <input type="submit" value="Add" class="btn " style="background-color: #1abc9c; color:white" />
+
+                <input type="reset" value="Reset" class="btn" style="background-color: #1abc9c; color:white" />
+            </div>
+        </div>
+        </div>
+   
+}
+
+

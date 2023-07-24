@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "abc";
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin| Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="~/admin/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/admin/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+
+    <link rel="stylesheet" href="~/admin/css/skins/_all-skins.min.css">
+    <!-- jQuery 2.1.4 -->
+    <script src="~/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- <script>
+       $.widget.bridge('uibutton', $.ui.button);
+     </script>
+     <!-- Bootstrap 3.3.5 -->
+
+    <script src="~/admin/js/bootstrap.min.js"></script>
+
+    <!-- FastClick -->
+    <script src="~/admin/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/admin/dist/js/app.min.js"></script>
+
+    <script src="~/admin/dist/js/demo.js"></script>
+
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini"  style="
+    BACKGROUND-COLOR: rgb(52, 73, 94);  ">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>Admin</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="~/admin/dashboard.php" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+             
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                
+                     
+                      
+                        <!-- Control Sidebar Toggle Button -->
+
+                   
+                </div>
+            </nav>
+        </header>
+
+    </div>
+
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                
+                <li>
+                    <a href="@Url.Action("Index", "Lsp")">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="treeview">
+
+                    <ul class="treeview-menu">
+                        <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                        <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                        <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-table"></i> <span>Lab Test</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("AddLabServices", "Lsp")"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Lab Test</a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("ViewLabServices", "Lsp")"><i class="fa fa-users" aria-hidden="true"></i> View Lab Test</a></li>
+                    </ul>
+                </li>
+                <!--<li class="treeview">
+                  <a href="<?php echo HTTP_PATH;?>admin/membership.php">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                    <span>Membership Details</span>
+                    <!--<i class="fa fa-angle-left pull-right"></i>-->
+                <!--</a>
+                </li>-->
+                <!--<li class="treeview">
+                  <a href="<?php //echo HTTP_PATH;?>admin/menu.php">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                    <span>Menu</span>
+                    <!--<i class="fa fa-angle-left pull-right"></i>-->
+                <!--</a>
+                </li>-->
+             
+                  @if (Session["Cateogry"]!= null)
+                  {
+                              if (Session["Cateogry"].ToString() == "Special")
+                              {
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i> <span>Special Lsp</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("LspRegister", "Lsp")"><i class="fa fa-stethoscope"></i>Add Another LSP</a></li>
+                        <li><a href="@Url.Action("ViewAnotherLsp", "Lsp")"><i class="fa fa-stethoscope"></i>View lsp</a></li>
+                    </ul>
+                </li>
+                              }
+                  }
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i> <span>Lab Schedule</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("AddLabSchedule", "Lsp")"><i class="fa fa-plus"></i>Add Schedule</a></li>
+                        <li><a href=""><i class="fa fa-table"></i>View Schedule</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="@Url.Action("Logout", "Login")">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <span>Logout</span>
+                        <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="@Url.Action("ManageProfile", "Lsp")">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>Manage Profile</span>
+                        <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="@Url.Action("ChangePassword", "Login")">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <span>Change Password</span>
+                        <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    </a>
+                </li>
+          
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style=" BACKGROUND-COLOR: #d2d6de;background-image:url('../../img/lab.jpg');background-repeat:no-repeat;background-size:cover">
+        <!-- Content Header (Page header) -->
+        
+        <section class="content" style=" BACKGROUND-COLOR: #d2d6de;background-image:url('../../img/lab.jpg');background-repeat:no-repeat;background-size:cover">
+            <center>
+                <h3>
+                    Welcome Lab Service Provider
+                    <small></small>
+                </h3>
+            </center>
+              <div class="row">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-md-6">
+                    @RenderBody()
+                </div>
+                <div class="col-sm-1">
+
+                </div>
+            </div>
+
+        </section>
+
+    </div><!-- /.content-wrapper -->
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+
+    window.onload = window.history.forward(0);  //calling function on window onload
+
+</script>  

@@ -1,0 +1,178 @@
+﻿<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="admin/dashboard.php" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>Admin</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="admin/dashboard.php" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="admin/dashboard.php" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="" class="user-image" alt="User Image">
+                                <span class="hidden-xs"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="" class="img-circle" alt="User Image">
+                                </li>
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="admin/profile.php" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="admin/logout.php" class="btn btn-default btn-flat">Log Out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!---- ///////////////////////-->
+
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li>
+                        <a href="<?php echo HTTP_PATH;?>admin/dashboard.php">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+
+                        <ul class="treeview-menu">
+                            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-table"></i> <span>User</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo HTTP_PATH;?>admin/data_table.php"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
+                        </ul>
+                    </li>
+                    <!--<li class="treeview">
+                    <a href="<?php echo HTTP_PATH;?>admin/membership.php">
+                      <i class="fa fa-credit-card" aria-hidden="true"></i>
+                      <span>Membership Details</span>
+                      <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    <!--</a>
+                    </li>-->
+                    <!--<li class="treeview">
+                    <a href="<?php //echo HTTP_PATH;?>admin/menu.php">
+                      <i class="fa fa-credit-card" aria-hidden="true"></i>
+                      <span>Menu</span>
+                      <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    <!--</a>
+                    </li>-->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Add Pages</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo HTTP_PATH;?>admin/category.php"><i class="fa fa-circle-o"></i>Add Category</a></li>
+                            <li><a href="<?php echo HTTP_PATH;?>admin/static_menu.php"><i class="fa fa-circle-o"></i>Add Static Page</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="<?php echo HTTP_PATH;?>admin/view_offers.php">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span>Manage Offers</span>
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="<?php echo HTTP_PATH;?>admin/manage_features.php">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span>Manage Features</span>
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="<?php echo HTTP_PATH;?>admin/gift.php">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span>Add Gifts</span>
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="<?php echo HTTP_PATH;?>admin/add_smile.php">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span>Add Smiles</span>
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        </a>
+                    </li>
+                    </li>
+                    <li class="treeview">
+                        <a href="<?php echo HTTP_PATH;?>admin/view_country.php">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span>Add Country</span>
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="<?php echo HTTP_PATH;?>admin/view_interest.php">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span>Add Interest</span>
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+
+        <!---- ///////////////////////-->
+    </div><!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2017-2018 <a href="#">Lakouayisyen</a>.</strong> All rights reserved.
+    </footer>
+
+    @RenderBody()
+
+
+</body>
+</html>

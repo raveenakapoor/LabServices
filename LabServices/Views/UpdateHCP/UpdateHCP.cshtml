@@ -1,0 +1,316 @@
+﻿@model LabServices.Models.HCPModel
+
+@{
+    ViewBag.Title = "UpdateHCP";
+    Layout = "~/Views/Shared/Dashboard.cshtml";
+}
+
+<h2>UpdateHCP</h2>
+<style>
+    .vdanger {
+        color: red;
+        font-size: medium;
+    }
+</style>
+
+<h2>HCP Register</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //
+       // $("#loginModal").modal('show');
+        //$("#Register").hide();
+        $("#Name").focus();
+        $("#cross").click(function () {
+            alert();
+            $("#mod").hide();
+            $("#Register").show();
+        })
+        var $regexname = /^[a-zA-Z]+$/;
+        var zip_regex = /^[0-9]+$/;
+        var add_regex = /^[0-9a-zA-Z]+$/;
+        $("#Name").blur(function () {
+
+            var val = $("#Name").val();
+            if (val.length == 0) {
+                $("#lblFirstName").text("*");
+            }
+            if (!val.match($regexname)) {
+
+                $("#lblFirstName").text("Invalid Name");
+            }
+            else
+                $("#lblFirstName").text("");
+        });
+
+
+        $("#Address").blur(function () {
+            var val = $("#Address").val();
+            if (val.length == 0) {
+                $("#lblAddress").text("*");
+            }
+            if (!val.match(add_regex)) {
+
+                $("#lblAddress").text("Invalid Address");
+            }
+            else
+                $("#lblAddress").text("");
+        });
+        $("#Contactno").blur(function () {
+            var val = $("#Contactno").val();
+            if (val.length == 0) {
+                $("#lblContactno").text("*");
+            }
+            if (!val.match(zip_regex) || val.length < 10 || val.length > 10) {
+
+                $("#lblContactno").text("Invalid Number");
+            }
+            else
+                $("#lblContactno").text("");
+        });
+        $("#AltContactmo").blur(function () {
+            var val = $("#AltContactmo").val();
+            if (val.length == 0) {
+                $("#lblAContactno").text("*");
+            }
+            if (!val.match(zip_regex) || val.length < 10 || val.length > 10) {
+
+                $("#lblAContactno").text("Invalid Number");
+            }
+            else
+                $("#lblAContactno").text("");
+        });
+
+        $("#quest1").blur(function () {
+            var val = $("#quest1").val();
+            if (val.length == 0) {
+                $("#lblques1").text("*");
+            }
+            else
+                $("#lblquest1").text("");
+        });
+        $("#quest2").blur(function () {
+            var val = $("#quest2").val();
+            if (val.length == 0) {
+                $("#lblquest2").text("*");
+            }
+            else
+                $("#lblquest2").text("");
+        });
+        $("#Email").blur(function () {
+            var val = $("#Email").val();
+            if (val.length == 0) {
+                $("#lblEmail").text("*");
+            }
+            else
+                $("#lblEmail").text("");
+        });
+        $("#quest3").blur(function () {
+            var val = $("#quest3").val();
+            if (val.length == 0) {
+                $("#lblquest3").text("*");
+            }
+            else
+                $("#lblquest3").text("");
+        });
+
+
+
+
+        //
+        $("#zipcode").blur(function () {
+            var zipcode = $(this).val();
+            alert(zipcode);
+
+            if (zipcode.length == 0) {
+                $("#lblzipcode").text("*");
+            }
+            if (!zipcode.match(zip_regex)) {
+
+                $("#lblzipcode").text("Invalid Number");
+            }
+            else {
+                $("#lblzipcode").text("");
+                $("#City").val("");
+                $("#State").val("");
+                $("#lblcity").text("");
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Register/GetCity/",
+                    datatype: JSON,
+
+                    data: { zipcode: zipcode },
+                    success: function (response) {
+
+
+                        if (response.ZipCode == 1) {
+                            console.log(response);
+                            $("#lblcity").text("No city found");
+                        }
+                        else {
+                            //console.log(response);
+                            $("#City").val(response.State);
+                            $("#State").val(response.City);
+                        }
+                    }
+
+
+
+                })
+            }
+
+        })
+        $("#dropquest1").change(function () {
+            var val = $('option:selected', this).val();
+            if(val==0)
+            {
+                ("#dropquest2").
+                    $('#poste option:selected').remove();
+            }
+
+
+        })
+
+
+    })
+</script>
+@using (Html.BeginForm("Index", "Login", FormMethod.Get))
+{
+    if (ViewData["msg"] != null)
+    {
+        <div class="modal-content col-md-6" id="mod" style="margin-left:150px;margin-top:100px">
+            <div class="modal-header">
+                <input type="button" class="close" data-dismiss="modal" id="cross" value="x">
+
+
+                <h4 class="modal-title success">@ViewData["msg"]</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(Model => Model.Passsword)
+                    </div>
+                    <div class="form-group col-md-4">
+                        @ViewData["Password"]
+                    </div>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(Model => Model.HCPId)
+                    </div>
+                    <div class="form-group col-md-4">
+                        @ViewData["HCPId"]
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary button button4">Sign</button>
+
+            </div>
+        </div>
+    }
+}
+@using (Html.BeginForm("RegisterHcp", "Register", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    if (ViewData["msg"] == null)
+    {
+        <div class="form-horizontal" id="Register">
+            <h4>LSPModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "Name" } })
+                    <span id="lblFirstName" class="vdanger"></span>
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.License_no, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.License_no, new { @class = "form-control", col = 10, id = "Address" })
+                    @Html.ValidationMessageFor(model => model.License_no, "", new { @class = "text-danger" })
+                    <span id="lblAddress" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control", col = 10, id = "Address" })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    <span id="lblAddress" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", id = "zipcode" } })
+                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                    <span id="lblzipcode" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", id = "City" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    <span id="lblcity" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", id = "State" } })
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    <span id="lblstate" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(Model => Model.ContactNo, new { htmlAttributes = new { @class = "form-control", id = "Contactno" } })
+
+                    <span id="lblContactno" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AltContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(Model => Model.AltContactNo, new { htmlAttributes = new { @class = "form-control", id = "AltContactmo" } })
+
+                    <span id="lblAContactno" class="vdanger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <span id="lblEmail" class="vdanger"></span>
+                </div>
+            </div>
+
+
+          
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Update" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+
+
+

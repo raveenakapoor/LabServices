@@ -1,0 +1,434 @@
+﻿@model LabServices.Models.PatientModel
+
+@{
+    ViewBag.Title = "PatientRegister";
+   
+}
+
+
+
+<link rel="stylesheet" href="~/Main.css" />
+<link rel="stylesheet" href="~/Stylesheets/Register.css" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $regexname = /^[a-zA-Z]+$/;
+        var $regexname1 = /^[a-z A-Z]+$/;
+        var zip_regex = /^[0-9]+$/;
+        var add_regex = /^[0-9a-zA-Z]+$/;
+        $("#reg").click(function () {
+            
+            if (!$("#FirstName").val().match($regexname) || !$("#LastName").val().match($regexname) || !$("#Doctor").val().match($regexname) || !$("#Contactno").val().match(zip_regex) || $("#Contactno").val().length < 10 || $("#Contactno").val().length > 10) {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                }, 5 * 1000);
+            }
+            if (!$("#age").val().match(zip_regex) || $("#age").val().length > 2 || (String($("#Contactno").val()).charAt(0)) < 7 || (String($("#Contactno").val()).charAt(0) > 9))
+            {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                }, 5 * 1000);
+            }
+        
+            else {
+              
+                $('#reg').attr('disabled', false);
+
+            }
+
+        }
+         );
+        $("#cross").click(function () {
+
+            $("#mod").hide();
+         
+            var url = "/login/Index";
+            window.location.href = url;
+        })
+
+        $("#FirstName").focus();
+    
+        $("#cross").click(function () {
+        
+            $("#mod").hide();
+            $("#Register").show();
+        })
+        $("#FirstName").blur(function () {
+
+            var val = $("#FirstName").val();
+            if (val.length == 0) {
+      
+                $('#FirstName').css('border-color', 'red');
+            }
+            if (!val.match($regexname)) {
+
+                $("#lblFirstName").text("Invalid Name"); $('#FirstName').css('border-color', 'red');
+            }
+            else {
+                $("#lblFirstName").text("");
+                $('#FirstName').css('border-color', 'green');
+            }
+        });
+        $("#LastName").blur(function () {
+            var val = $("#LastName").val();
+            if (val.length == 0) {
+                $('#LastName').css('border-color', 'red');
+            }
+            if (!val.match($regexname)) {
+                $("#lblLastName").text("Invalid Last Name"); $('#LastName').css('border-color', 'red');
+            }
+            else {
+                $("#lblLastName").text(""); $('#LastName').css('border-color', 'green');
+            }
+        });
+        $("#age").blur(function () {
+            var val = $("#age").val();
+            if (val.length == 0) {
+                $('#age').css('border-color', 'red');
+            }
+            if (!val.match(zip_regex) || val.length > 2) {
+                $('#age').css('border-color', 'red');
+                $("#lblage").text("Age Range between 0 - 100"); 
+            }
+            else {
+                $("#lblage").text("");
+                $('#age').css('border-color', 'green');
+            }
+        });
+        $("#Address").blur(function () {
+            var val = $("#Address").val();
+            if (val.length == 0) {
+                $('#Address').css('border-color', 'red');
+            }
+
+            else {
+                $("#lblAddress").text(""); $('#Address').css('border-color', 'green');
+            }
+        });
+        $("#Contactno").blur(function () {
+            var val = $("#Contactno").val();
+            var one = String(val).charAt(0);
+
+            if (val.length == 0) {
+                $('#Contactno').css('border-color', 'red');
+            }
+            if (!val.match(zip_regex) || val.length < 10 || val.length > 10 || (one < 7 || one > 9)) {
+
+                $("#lblContactno").text("Invalid Number"); $('#Contactno').css('border-color', 'red');
+            }
+            else {
+                $("#lblContactno").text(""); $('#Contactno').css('border-color', 'green');
+            }
+        });
+        $("#Complain").blur(function () {
+            var val = $("#Complain").val();
+            if (val.length == 0) {
+                $('#Complain').css('border-color', 'red');
+            }
+          
+            else {
+                $("#lblcomplain").text("");
+                $('#Complain').css('border-color', 'green');
+            }
+        });
+        $("#Doctor").blur(function () {
+            var val = $("#Doctor").val();
+            if (val.length == 0) {
+                $('#Doctor').css('border-color', 'red');
+            }
+            if (!val.match($regexname1)) {
+
+                $("#lbldoctor").text("Invalid Name"); $('#Doctor').css('border-color', 'red');
+            }
+            else {
+                $("#lbldoctor").text("");
+                $('#Doctor').css('border-color', 'green');
+            }
+        });
+        $("#quest1").blur(function () {
+            var val = $("#quest1").val();
+            if (val.length == 0) {
+                $('#quest1').css('border-color', 'red');
+            }
+            else {
+                $("#lblquest1").text(""); $('#quest1').css('border-color', 'green');
+            }
+        });
+        $("#quest3").blur(function () {
+            var val = $("#quest3").val();
+            if (val.length == 0) {
+                $('#quest3').css('border-color', 'red');
+            }
+            else {
+                $("#lblquest3").text("");
+                $('#quest3').css('border-color', 'green');
+            }
+        });
+        $("#quest2").blur(function () {
+            var val = $("#quest2").val();
+            if (val.length == 0) {
+                $('#quest2').css('border-color', 'red');
+            }
+            else {
+                $("#lblquest2").text("");
+                $('#quest2').css('border-color', 'green');
+
+            }
+        });
+        $("#Insuarncetxt").blur(function () {
+            var val = $("#Insuarncetxt").val();
+            if (val.length == 0) {
+                $('#Insuarncetxt').css('border-color', 'red');
+            }
+            if (!val.match(zip_regex)) {
+
+                $("#lblinsurance").text("Invalid Number"); $('#Insuarncetxt').css('border-color', 'red');
+            }
+            else {
+                $("#lblinsurance").text("");
+                $('#Insuarncetxt').css('border-color', 'green');
+            }
+        });
+        $('#SelectInsurance').on('change', function () {
+            var val = this.checked ? 1 : 0;
+
+            if (val == 1) {
+                $('#Insurance').show();
+               
+            }
+            else
+                $('#Insurance').hide();
+
+        })
+    })
+</script>
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Get))
+{
+    if (ViewData["msg"] != null)
+    {
+
+        <div class="modal-content col-md-6" id="mod" style="margin-left:150px;margin-top:100px">
+            <div class="modal-header">
+                <input type="button" class="close" data-dismiss="modal" id="cross" value="x">
+
+
+                <h4 class="modal-title success">@ViewData["msg"]</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(Model => Model.Passsword):
+                    </div>
+                    <div class="form-group col-md-4">
+                        @ViewData["Password"]
+                    </div>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(Model => Model.PatientId)
+                    </div>
+                    <div class="form-group col-md-4">
+                        @ViewData["LabId"]
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary button button4">Sign</button>
+
+            </div>
+        </div>
+    }
+}
+@using (Html.BeginForm("RegisterPatient", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    if (ViewData["msg"] == null)
+    {<div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <h3 class="font" style="margin-top: 60px;">Patient Registeration</h3>
+            <hr />
+            <div class="form-horizontal" style="padding:15px">
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.FirstName, "First Name", new { @class = "control-label  font" })
+                    </div>
+                    <div class="col-md-8">
+
+                        @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", id = "FirstName", placeholder = "First Name", required="required" })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        <span id="lblFirstName" class="vdanger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(Model => Model.LastName, new { @class = "form-control", id = "LastName", placeholder = "Last Name", required = "required" })
+                            <span id="lblLastName" class="vdanger"></span>
+                        </div>
+                    </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label font" })
+                        </div>
+                        <div class="col-md-8">
+                            <font color="white">Male</font>
+                            @Html.RadioButtonFor(Model => Model.Gender, "Male", new { @checked = "checked" })
+                            <font color="white">Female</font>
+                            @Html.RadioButtonFor(Model => Model.Gender, "Female")
+
+
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Age, new { @class = "form-control", id = "age", required = "required",type="number"  })
+                            <span id="lblage" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", col = 10, id = "Address", placeholder = "Address", required = "required" })
+                            <span id="lblAddress" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.ContactNo,  new { @class = "form-control", id = "Contactno", placeholder = "Contact No", required = "required",type="Number"  })
+
+                            <span id="lblContactno" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+    @Html.LabelFor(model => model.MedicalComplaint, htmlAttributes: new { @class = "control-label font" })
+                        </div>
+    <div class="col-md-8">
+        @Html.TextAreaFor(model => model.MedicalComplaint, new { @class = "form-control", col = 10, id = "Complain", placeholder = "MedicalComplaint", required = "required" })
+        <span id="lblcomplain" class="vdanger"></span>
+    </div>
+</div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.ReferredDoctor, htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.ReferredDoctor, new { @class = "form-control", id = "Doctor", placeholder = "ReferredDoctor", required = "required"  })
+                            <span id="lbldoctor" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <input type="checkbox" id="SelectInsurance" name="checkbox" /><font color="white">Insurance</font>
+
+                    </div>
+                </div>
+                <div class="form-group" id="Insurance" style="display:none">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.InsuranceCover, htmlAttributes: new { @class = "control-label  font" })
+                      </div>
+                          <div class="col-md-8">
+
+                            @Html.TextBoxFor(model => Model.InsuranceCover, new { @class = "form-control", placeholder = "Health Insuarnce No", id = "Insuarncetxt" ,required="required", maxlength = 8})
+
+                            <span id="lblinsurance" class="vdanger"></span>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.Label("Question", htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.Label("What is your favourite food?", htmlAttributes: new { @class = "control-label font"  })
+
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.Label("Answer", htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Answer1,  new { @class = "form-control", id = "quest1", placeholder = "Answer", required = "required" ,type="password"})
+                            @Html.ValidationMessageFor(model => model.Answer1, "", new { @class = "text-danger" })
+                            <span id="lblques1" class="vdanger"></span>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.Label("Question", htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.Label("Who is your favourite actor?", htmlAttributes: new { @class = "control-label font" })
+
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.Label("Answer", htmlAttributes: new { @class = "control-label font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Answer2,new { @class = "form-control", id = "quest2", placeholder = "Answer", required = "required", type = "password" } )
+                            @Html.ValidationMessageFor(model => model.Answer2, "", new { @class = "text-danger" })
+                            <span id="lblques2" class="vdanger"></span>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.Label("Question", htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.Label("Which is your Birth City?", htmlAttributes: new { @class = "control-label font" })
+
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.Label("Answer", htmlAttributes: new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Answer3, new { @class = "form-control", id = "quest3", placeholder = "Answer", required = "required", type = "password" })
+                         
+                            <span id="lblques3" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <input type="submit" value="Register"  id="reg" class="btn col-md-10" style="  background-color: #1abc9c; color:white" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    }
+}

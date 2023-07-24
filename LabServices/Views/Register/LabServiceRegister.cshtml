@@ -1,0 +1,226 @@
+﻿@model LabServices.Models.LSPModel
+
+@{
+    ViewBag.Title = "LabServiceRegister";
+}
+
+<h4>Lab Service Register</h4>
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="container">
+        <hr />
+        <div class="col-md-3"></div>
+        <div class="col-md-8">
+        <div class="form-group">
+              @Html.LabelFor(model => model.Name,  new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+              @Html.TextBoxFor(model => model.Name, new  { @class = "form-control", placeholder = "Name" } )
+                 
+              </div>
+        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control" , placeholder = "Address" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ZipCode, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ZipCode, new { @class = "form-control", placeholder = "Zip code" })
+                        @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.State, new { @class = "form-control" , placeholder = "State" } )
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactNo,new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" , placeholder = "Contact No" } )
+                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AltContactNo,  new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.AltContactNo,  new { @class = "form-control", placeholder = "Alternate Contact No" } )
+                        @Html.ValidationMessageFor(model => model.AltContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email,  new { @class = "control-label col-md-2", placeholder = "Email" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Email, new  { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category, new { @class = "control-label col-md-2" , placeholder = "Category" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Category, new { @class = "form-control" })
+                    @*@Html.CheckBox("Category")normal, new  { @class = "form-control" })
+    @Html.CheckBox("Category")speciality, new  { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+    @Html.CheckBoxFor(Model.Category, new { @class = "control-label col-md-2" }) *@
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Question1, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @{
+                        List<SelectListItem> que1list = new List<SelectListItem>();
+
+                        que1list.Add(new SelectListItem
+                        {
+                            Text = "What is your favourite food?",
+                            Value = "What is your favourite food?"
+                        });
+
+                        que1list.Add(new SelectListItem
+                        {
+                            Text = "Who is your favourite actor?",
+                            Value = "Who is your favourite actor?"
+                        });
+
+                        que1list.Add(new SelectListItem
+                        {
+                            Text = "What is your Birth City?",
+                            Value = "What is your Birth City?"
+                        });
+
+                    }
+                    @Html.DropDownListFor(model => model.Question1, que1list, "-- Select One--")
+                    @Html.ValidationMessageFor(model => model.Question1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Answer1, new { @class = "control-label col-md-2", placeholder = "Answer" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Answer1, new { @class = "form-control", placeholder = "Answer" })
+                    @Html.ValidationMessageFor(model => model.Answer1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Question2, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @{
+                        List<SelectListItem> que2list = new List<SelectListItem>();
+
+                        que2list.Add(new SelectListItem
+                        {
+                            Text = "What is your favourite food?",
+                            Value = "What is your favourite food?"
+                        });
+
+                        que2list.Add(new SelectListItem
+                        {
+                            Text = "Who is your favourite actor?",
+                            Value = "Who is your favourite actor?"
+                        });
+
+                        que2list.Add(new SelectListItem
+                        {
+                            Text = "What is your Birth City?",
+                            Value = "Who is your favourite actor?"
+                        });
+
+                    }
+                    @Html.DropDownListFor(model => model.Question2, que2list, "-- Select One--")
+                    @Html.ValidationMessageFor(model => model.Question2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Answer2, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Answer2, new { @class = "form-control",, placeholder = "Answer" })
+                    @Html.ValidationMessageFor(model => model.Answer2 ,"", new { @class = "text-danger" })
+                </div>
+            </div>
+                   
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Question3, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @{
+                        List<SelectListItem> que3list = new List<SelectListItem>();
+
+                        que3list.Add(new SelectListItem
+                        {
+                            Text = "What is your favourite food?",
+                            Value = "What is your favourite food?"
+                        });
+
+                        que3list.Add(new SelectListItem
+                        {
+                            Text = "Who is your favourite actor?",
+                            Value = "Who is your favourite actor?"
+                        });
+
+                        que3list.Add(new SelectListItem
+                        {
+                            Text = "What is your Birth City?",
+                            Value = "Who is your favourite actor?"
+                        });
+
+                    }
+                    @Html.DropDownListFor(model => model.Question3, que3list, "-- Select One--")
+                    @Html.ValidationMessageFor(model => model.Question3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Answer3, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Answer3, new { @class = "form-control", placeholder = "Answer" })
+                    @Html.ValidationMessageFor(model => model.Answer3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Register" class="btn btn-default" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Clear" class="btn btn-default" />
+                </div>
+            </div>
+
+               </div>
+            </div>
+            
+         
+      
+                        }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

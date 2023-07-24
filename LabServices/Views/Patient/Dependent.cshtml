@@ -1,0 +1,116 @@
+﻿@model LabServices.Models.AddDependent
+
+@{
+    ViewBag.Title = "Dependent";
+    Layout = "~/Views/Shared/PatientMaster.cshtml";
+}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+
+
+@using (Html.BeginForm())
+{
+   <div class="row">
+
+        <div class="col-md-12" style="margin-left:-150px">
+            <h3 class="font">View Dependent</h3>
+            <hr />
+            <div>
+                <table id="example" class="table table-hover dataTable no-footer border" cellspacing="0" width="300" style="width: 300px; background-color: white;">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Sno.")
+                            </th>
+                            <th>
+                                @Html.DisplayName(" Name")
+                            </th>
+
+                            <th>
+                                Relationship
+                            </th>
+                            <th>
+                                Gender
+                            </th>
+                            <th>
+                                Age
+                            </th>
+                            <th>
+                                Address
+                            </th>
+                            <th>
+                                Contact
+                            </th>
+                          
+                            <th>
+                                Insuarnce
+                            </th>
+                            <th>
+                                @Html.DisplayName("Update")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Delete")
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0, j = i + 1; i < @Model.data.Tables[0].Rows.Count; i++, j++)
+                {
+
+                            <tr>
+                                <td>
+
+                                    @j
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["FirstName"].ToString() @Model.data.Tables[0].Rows[i]["LastName"].ToString()
+                                </td>
+
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["relation"].ToString()
+                                </td>
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["Gender"].ToString()
+                                </td>
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["Age"].ToString()
+                                </td>
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["Address"].ToString()
+                                </td>
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["ContactNo"].ToString()
+                                </td>
+                                <td>
+                                    @Model.data.Tables[0].Rows[i]["InsuranceCover"].ToString()
+                                </td>
+                          
+                                <td>
+                                    @Html.ActionLink("Update ", "UpdateDependant", new { DepandantId = Convert.ToInt32(@Model.data.Tables[0].Rows[i]["DependantId"]) })
+
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "DeleteDepenent", new { DepandantId = Convert.ToInt32(Model.data.Tables[0].Rows[i]["DependantId"]) } ,new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+    </div>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#example').DataTable();
+                });
+            </script>
+            }

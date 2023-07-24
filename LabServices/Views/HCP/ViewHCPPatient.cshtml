@@ -1,0 +1,151 @@
+﻿@model LabServices.Models.PatientModel
+
+@{
+    ViewBag.Title = "ViewHCPPatient";
+    Layout = "~/Views/Shared/HCPMaster.cshtml";
+}
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+@*<table id="example" class="table table-striped table-bordered" cellspacing="0" width="400">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+        </tr>
+        </tbody>
+    </table>*@
+<div class="row">
+
+    <div class="col-md-12" style="margin-left:-100px">
+        <h3 class="font">Patients</h3>
+        <hr />
+        <div>
+            <table id="example" class="table table-hover dataTable no-footer border" cellspacing="0" width="300"  style="width: 300px; background-color: white;">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Sno.")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PatientId)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Name")
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Age)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactNo)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Complaint")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Doctor")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.InsuranceCover)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Action")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Action")
+                        </th>
+                        @*<th>
+
+                            </th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0, j = i + 1; i < @Model.Data.Tables[0].Rows.Count; i++, j++)
+                    {
+                        <tr>
+                            <td>
+
+                                @j
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["PatientId"].ToString()
+                            </td>
+
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["FirstName"].ToString()    @Model.Data.Tables[0].Rows[i]["LastName"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["Gender"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["Age"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["Address"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["ContactNo"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["MedicalComplaint"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["ReferredDoctor"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["InsuranceCover"].ToString()
+                            </td>
+                            <td>
+                                @Html.ActionLink("Update ", "UpdateHCPPatient", new { userid = @Model.Data.Tables[0].Rows[i]["PatientId"].ToString() })
+
+                                </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteHCP_patient", new { userid = @Model.Data.Tables[0].Rows[i]["PatientId"].ToString() }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>

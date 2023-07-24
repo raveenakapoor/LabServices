@@ -1,0 +1,135 @@
+﻿@model LabServices.Models.LSPModel
+
+@{
+    ViewBag.Title = "ViewLSP";
+    Layout = "~/Views/Shared/LSPMaster.cshtml";
+}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+<script>
+    $(document).ready(function () {
+        //  $('#example').DataTable();
+    });
+</script>
+<p>
+    @Html.ActionLink("Create New", "LspRegister")
+</p>
+<div class="row">
+
+    <div class="col-md-12">
+        <h3 class="font" style="margin-top: 60px;">Lab Service Provider</h3>
+        <hr />
+        <div style=" margin-left:-150px">
+            <table id="example" class="table table-hover dataTable no-footer border" cellspacing="0" width="300" margin-left="-150px" style="width: 300px; background-color: white;">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Sno.")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ZipCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.State)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AltContactNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Update")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Delete")
+                        </th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @for (int i = 0, j = i + 1; i < @Model.Data.Tables[0].Rows.Count; i++, j++)
+            {
+                        <tr>
+                            <td>
+
+                                @j
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["LabId"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[0]["name"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["zipcode"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["city"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["state1"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["email"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["category"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["contact_no"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["alternate_no"].ToString()
+                            </td>
+                            <td>
+                                @Model.Data.Tables[0].Rows[i]["Address1"].ToString()
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditOtherLsp", new { userid = @Model.Data.Tables[0].Rows[i]["LabId"].ToString() })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteLSP", new { userid = @Model.Data.Tables[0].Rows[i]["LabId"].ToString() })
+                            </td>
+                        </tr>
+                    
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+
+
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+        }
+

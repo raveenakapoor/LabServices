@@ -1,0 +1,447 @@
+﻿@model LabServices.Models.HCPModel
+
+@{
+    ViewBag.Title = "HCPRegister";
+
+}
+<link rel="stylesheet" href="~/Main.css" />
+<link rel="stylesheet" href="~/Stylesheets/Register.css" />
+<style>
+    .vdanger {
+        color: red;
+        font-size: medium;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $regexname = /^[a-zA-Z]+$/;
+        var zip_regex = /^[0-9]+$/;
+        var add_regex = /^[0-9a-zA-Z]+$/;
+        $("#reg").click(function () {
+            if ($("#Name").val().length == 0 || $("#Address").val().length == 0 || $("#Contactno").val().length == 0 || $("#AltContactmo").val().length == 0 || $("#quest1").val().length == 0 || $("#quest2").val().length == 0 || $("#quest3").val().length == 0) {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                }, 5 * 1000);
+            }
+            if (!$("#Name").val().match($regexname) || !$("#Contactno").val().match(zip_regex) || $("#Contactno").val().length < 10 || $("#Contactno").val().length > 10) {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                }, 5 * 1000);
+            }
+            if (!$("#AltContactmo").val().match(zip_regex) || $("#AltContactmo").val().length < 10 || $("#AltContactmo").val().length > 10) {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                }, 5 * 1000);
+            }
+            else {
+
+                $('#reg').attr('disabled', false);
+
+            }
+
+        }
+         );
+        // $("#loginModal").modal('show');
+        //$("#Register").hide();
+        $("#Name").focus();
+        $("#cross").click(function () {
+
+            $("#mod").hide();
+            
+            var url = "/login/Index";
+            window.location.href = url;
+        })
+        var $regexname = /^[a-zA-Z]+$/;
+        var zip_regex = /^[0-9]+$/;
+        var add_regex = /^[0-9a-zA-Z]+$/;
+        $("#Name").blur(function () {
+
+            var val = $("#Name").val();
+            if (val.length == 0) {
+                $('#Name').css('border-color', 'red');
+
+            }
+            if (!val.match($regexname)) {
+
+                $("#lblFirstName").text("Invalid Name");
+                $('#Name').css('border-color', 'red');
+
+            }
+            else {
+                $("#lblFirstName").text("");
+                $('#Name').css('border-color', 'green');
+                $('#reg').attr('disabled', false);
+            }
+        });
+
+
+
+        $("#Address").blur(function () {
+            var val = $("#Address").val();
+            if (val.length == 0) {
+
+                $('#Address').css('border-color', 'red');
+            }
+            else {
+                $("#lblAddress").text("");
+                $('#Address').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+        $("#Contactno").blur(function () {
+            var val = $("#Contactno").val();
+            var one = String(val).charAt(0);
+
+            if (val.length == 0) {
+                $('#Contactno').css('border-color', 'red');
+            }
+            if (!val.match(zip_regex) || val.length < 10 || val.length > 10 || (one < 7 || one > 9)) {
+
+                $("#lblContactno").text("Invalid Number");
+                $('#Contactno').css('border-color', 'red');
+            }
+            else {
+                $("#lblContactno").text(""); $('#Contactno').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+        $("#AltContactmo").blur(function () {
+            var val = $("#AltContactmo").val(); var one = String(val).charAt(0);
+            if (val.length == 0) {
+
+                $('#AltContactmo').css('border-color', 'red');
+            }
+            if (!val.match(zip_regex) || val.length < 10 || val.length > 10 || (one < 7 || one > 9)) {
+
+                $("#lblAContactno").text("Invalid Number");
+                $('#AltContactmo').css('border-color', 'red');
+            }
+            else {
+                $("#lblAContactno").text("");
+                $('#AltContactmo').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+
+        $("#quest1").blur(function () {
+            var val = $("#quest1").val();
+            if (val.length == 0) {
+                $('#quest1').css('border-color', 'red');
+            }
+            else {
+                $("#lblquest1").text("");
+                $('#quest1').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+        $("#quest2").blur(function () {
+            var val = $("#quest2").val();
+            if (val.length == 0) {
+                $('#quest2').css('border-color', 'red');
+            }
+            else {
+                $("#lblquest2").text("");
+                $('#quest2').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+        $("#Email").blur(function () {
+            var val = $("#Email").val();
+            if (val.length == 0) {
+                $('#Email').css('border-color', 'red');
+            }
+            else {
+                $("#lblEmail").text("");
+                $('#Email').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+        $("#quest3").blur(function () {
+            var val = $("#quest3").val();
+            if (val.length == 0) {
+                $('#quest3').css('border-color', 'red');
+            }
+            else {
+                $("#lblquest3").text("");
+                $('#quest3').css('border-color', 'green'); $('#reg').attr('disabled', false);
+            }
+        });
+
+
+
+
+        //
+        $("#zipcode").blur(function () {
+            var zipcode = $(this).val();
+
+
+            if (zipcode.length == 0) {
+                $('#zipcode').css('border-color', 'red');
+            }
+            if (!zipcode.match(zip_regex)) {
+
+                $("#lblzipcode").text("Invalid Number");
+                $('#zipcode').css('border-color', 'red');
+            }
+            else {
+                $('#zipcode').css('border-color', 'green');
+                $("#lblzipcode").text("");
+                $("#City").val("");
+                $("#State").val("");
+                $("#lblcity").text("");
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Register/GetCity/",
+                    datatype: JSON,
+
+                    data: { zipcode: zipcode },
+                    success: function (response) {
+
+
+                        if (response.ZipCode == 1) {
+                            console.log(response);
+                            $("#lblcity").text("No city found");
+                        }
+                        else {
+                            //console.log(response);
+                            $("#City").val(response.State);
+                            $("#State").val(response.City);
+                        }
+                    }
+
+
+
+                })
+            }
+
+        })
+
+
+
+    })
+</script>
+@using (Html.BeginForm("Index", "Login", FormMethod.Get))
+{
+    if (ViewData["msg"] != null)
+    {
+        <div class="modal-content col-md-6" id="mod" style="margin-left:150px;margin-top:100px">
+            <div class="modal-header">
+                <input type="button" class="close" data-dismiss="modal" id="cross" value="x">
+
+
+                <h4 class="modal-title success">@ViewData["msg"]</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(Model => Model.Passsword)
+                    </div>
+                    <div class="form-group col-md-4">
+                        @ViewData["Password"]
+                    </div>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(Model => Model.HCPId)
+                    </div>
+                    <div class="form-group col-md-4">
+                        @ViewData["HCPId"]
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary button button4">Sign</button>
+
+            </div>
+        </div>
+    }
+}
+@using (Html.BeginForm("RegisterHcp", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    if (ViewData["msg"] == null)
+    {
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <h3 class="font" style="margin-top: 60px;">Health Care Provider Registeration</h3>
+                <hr />
+                <div class="form-horizontal" id="Register">
+
+                   
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Name, new  { @class = "form-control", id = "Name", placeholder = "Name", required = "required"  })
+                            <span id="lblFirstName" class="vdanger"></span>
+                          
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.License_no, new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.License_no, new { @class = "form-control", col = 10, id = "", placeholder = "License No", required = "required", type = "Number" })
+                        
+                            <span id="lblAddress" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Address, new { @class = "control-label font" })
+                        </div>
+                             <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", col = 10, id = "Address", placeholder = "Address", required = "required" })
+                        
+                            <span id="lblAddress" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.ZipCode,  new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.ZipCode,  new { @class = "form-control", id = "zipcode", placeholder = "Zip Code", required = "required", type = "Number" })
+                     
+                            <span id="lblzipcode" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div  class="col-md-4">
+                        @Html.LabelFor(model => model.City,new { @class = "control-label font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.City, new  { @class = "form-control", id = "City" , placeholder = "City", required = "required"  })
+                        
+                            <span id="lblcity" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.State, new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.State,  new { @class = "form-control", id = "State" , placeholder = "State", required = "required"  })
+                      
+                            <span id="lblstate" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.ContactNo, new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(Model => Model.ContactNo, new { @class = "form-control", id = "Contactno", placeholder = "Contact No", required = "required", type = "Number" })
+
+                            <span id="lblContactno" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.AltContactNo, new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(Model => Model.AltContactNo,  new { @class = "form-control", id = "AltContactmo", placeholder = "Alternate Contact No", required = "required" ,type="Number"  })
+
+                            <span id="lblAContactno" class="vdanger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Email,  new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", id = "Email", placeholder = "Email", required = "required" ,type="Email" })
+                          
+                            <span id="lblEmail" class="vdanger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.Label("Question",  new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.Label("What is your favourite food?", new { @class = "control-label font" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.Label("Answer", new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Answer1, new  { @class = "form-control", id = "quest1", placeholder = "Answer", required = "required" })
+                        
+                            <span id="lblques1" class="vdanger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.Label("Question",  new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.Label("Who is your favourite actor?", htmlAttributes: new { @class = "control-label font" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.Label("Answer", new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Answer2,  new { @class = "form-control", id = "quest2" , placeholder = "Answer", required = "required"  })
+                        
+                            <span id="lblques2" class="vdanger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.Label("Question",  new { @class = "control-label  font" })
+                        </div>
+                            <div class="col-md-8">
+                            @Html.Label("Which is your Birth City?", new { @class = "control-label font" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                        @Html.Label("Answer", new { @class = "control-label  font" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Answer3, new { @class = "form-control", id = "quest3", placeholder = "Answer", required = "required" })
+                          
+                            <span id="lblques3" class="vdanger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <input type="submit" value="Register" class="btn col-md-10" style="  background-color: #1abc9c; color:white" id="reg"/>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    }
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

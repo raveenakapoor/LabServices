@@ -1,0 +1,130 @@
+﻿@model LabServices.Models.AddLabService
+
+@{
+    ViewBag.Title = "AddLabSchedule";
+}
+
+<center>
+    <h2><b><font color="white">Add Lab Schedule</font></b></h2>
+</center>
+<style>
+    input[type=text] {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+      
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+        input[type=text]:focus {
+            width: 100%;
+        }
+</style>
+
+@using (Html.BeginForm("FetchTest", "Lsp", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.LabId, htmlAttributes: new { @class = "control-label col-md-2 font" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.LabId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LabId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-10">
+            <input type="submit" value="Search" class="btn btn-danger" />
+        </div>
+    </div>
+
+}
+
+@if(ViewData["message"] != null) { 
+<table class="table">
+
+
+    <tr>
+        @Html.ActionLink("Create New", "AddLabServices")
+    </tr>
+
+    <tr>
+        <th>
+            @Html.DisplayName("Sno.")
+        </th>
+
+        <th>
+            @Html.DisplayName("Test Name")
+            @Html.DisplayNameFor(model => model.TestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TestCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TestDescription)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TestDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostOfTest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabHome)
+        </th>
+        <th>
+            @Html.DisplayName("Update")
+
+        </th>
+        <th>
+            @Html.DisplayName("Delete")
+
+    </th>
+</tr>
+
+@for (int i = 0, j = i + 1; i < @Model.Data.Tables[0].Rows.Count; i++, j++)
+{
+    <tr>
+        <td>
+
+            @j
+        </td>
+
+        <td>
+            @Model.Data.Tables[0].Rows[i]["TestName"].ToString()
+        </td>
+        <td>
+            @Model.Data.Tables[0].Rows[i]["TestCode"].ToString()
+        </td>
+        <td>
+            @Model.Data.Tables[0].Rows[i]["TestDescription"].ToString()
+        </td>
+        <td>
+            @Model.Data.Tables[0].Rows[i]["TestDuration"].ToString()
+        </td>
+        <td>
+            @Model.Data.Tables[0].Rows[i]["CostOfTest"].ToString()
+        </td>
+        <td>
+            @Model.Data.Tables[0].Rows[i]["LabHome"].ToString()
+        </td>
+
+        <td>
+            @Html.ActionLink("Select", "TestForSchedule", new { testcode = @Model.Data.Tables[0].Rows[i]["TestCode"].ToString() })
+        </td>
+       
+
+    </tr>
+}
+
+</table>
+
+}
+
+
